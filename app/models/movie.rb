@@ -14,5 +14,44 @@ class Movie < ActiveRecord::Base
       return ratings.keys
     end
   end
-    
+
+  def self.sort_movies_by_title(movies)
+    if movies.nil?
+      return Movie.all
+    else
+      return Movie.order(:title)
+    end
+  end
+
+  def self.check_sorted_title(movies)
+    if movies.nil?
+      return false
+    else
+      return movies
+    end
+  end
+
+  def self.sort_movies_by_dates(movies)
+    if movies.nil?
+      return Movie.all
+    else
+      return Movie.order(:release_date)
+    end
+  end
+
+  def self.check_sorted_dates(movies)
+    if movies.nil?
+      return false
+    else
+      return movies
+    end
+  end
+
+  def self.array_to_hash(array)
+    if array.nil?
+      return []
+    else
+      Hash[array.map {|v| [v, '1']}]
+    end
+  end
 end

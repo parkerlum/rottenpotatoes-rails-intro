@@ -10,14 +10,37 @@
   <% end %>
   <%= submit_tag 'Refresh', id: 'ratings_submit', class: 'btn btn-primary' %>
 <% end %>
-<%#  Part 2: Start here... %>
+
 
 <table class="table table-striped col-md-12" id="movies">
   <thead>
     <tr>
-      <th>Movie Title</th>
+
+      <% if @sorted_movies_check %>
+        <th id='title_header' class='hilite bg-warning'>
+          <%= link_to "Movie Title", movies_path({:sort_movies => false, :ratings => @ratings_hash}) %>
+         
+          <% @movies = @sorted_movies %>
+        </th>
+      <% else %>
+        <th>
+          <%= link_to "Movie Title", movies_path({:sort_movies => true, :ratings => @ratings_hash}) %>
+          
+        </th>
+      <% end %>
       <th>Rating</th>
-      <th>Release Date</th>
+      <% if @sorted_dates_check %>
+        <th id='release_date_header' class='hilite bg-warning'>
+          <%= link_to "Release Date", movies_path({:sort_dates => false, :ratings => @ratings_hash}) %>
+          
+          <% @movies = @sorted_dates %>
+        </th>
+      <% else %>
+        <th>
+          <%= link_to "Release Date", movies_path({:sort_dates => true, :ratings => @ratings_hash}) %>
+     
+        </th>
+      <% end %>
       <th>More Info</th>
     </tr>
   </thead>

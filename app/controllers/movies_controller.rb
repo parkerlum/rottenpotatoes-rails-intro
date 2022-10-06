@@ -10,6 +10,11 @@ class MoviesController < ApplicationController
       @movies = Movie.with_ratings(params[:ratings])
       @all_ratings = ['G','PG','PG-13','R']
       @ratings_to_show = Movie.show_ratings(params[:ratings])
+      @sorted_movies = Movie.sort_movies_by_title(params[:sort_movies])
+      @sorted_movies_check = Movie.check_sorted_title(params[:sort_movies])
+      @sorted_dates = Movie.sort_movies_by_dates(params[:sort_dates])
+      @sorted_dates_check = Movie.check_sorted_dates(params[:sort_dates])
+      @ratings_hash = Movie.array_to_hash(@ratings_to_show)
     end
   
     def new
