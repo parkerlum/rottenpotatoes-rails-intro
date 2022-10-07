@@ -1,7 +1,11 @@
 class Movie < ActiveRecord::Base
-  def self.with_ratings(ratings_list)
+  def self.with_ratings(ratings_list, sessions)
     if ratings_list.nil?
-      Movie.all
+      if sessions.nil?
+        Movie.all
+      else
+        Movie.where(rating: sessions.keys)
+      end
     else
       Movie.where(rating: ratings_list.keys)
     end
@@ -31,9 +35,13 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def self.sort_movies_by_dates(movies)
+  def self.sort_movies_by_dates(movies, session)
     if movies.nil?
-      return Movie.all
+      if session.nil?
+        return Movie.all
+      else
+        return Movie.order(:release_date)
+      end
     else
       return Movie.order(:release_date)
     end
