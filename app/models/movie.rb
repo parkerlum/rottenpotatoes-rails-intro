@@ -37,11 +37,7 @@ class Movie < ActiveRecord::Base
 
   def self.sort_movies_by_dates(movies, session)
     if movies.nil?
-      if session.nil?
-        return Movie.all
-      else
-        return Movie.order(:release_date)
-      end
+      return Movie.all
     else
       return Movie.order(:release_date)
     end
